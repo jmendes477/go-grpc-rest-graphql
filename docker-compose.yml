@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  grpc-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.grpc
+    container_name: grpc-server
+    ports:
+      - "50051:50051"
+    command: ["/server"]
+
+  grpc-client:
+    build:
+      context: .
+      dockerfile: Dockerfile.grpc
+    container_name: grpc-client
+    depends_on:
+      - grpc-server
+    command: ["/client"]
+
+  rest-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.rest
+    container_name: rest-server
+    ports:
+      - "8080:8080"
+    command: ["/server"]
+
+  rest-client:
+    build:
+      context: .
+      dockerfile: Dockerfile.rest
+    container_name: rest-client
+    depends_on:
+      - rest-server
+    command: ["/client"]
+
+  graphql-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.graphql
+    container_name: graphql-server
+    ports:
+      - "8081:8081"
+    command: ["/server"]
+
+  graphql-client:
+    build:
+      context: .
+      dockerfile: Dockerfile.graphql
+    container_name: graphql-client
+    depends_on:
+      - graphql-server
+    command: ["/client"]

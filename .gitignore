@@ -1,0 +1,16 @@
+# Go
+bin/
+*.exe
+*.test
+*.out
+
+# Protobuf
+proto/*.pb.go
+proto/*.pb.gw.go
+
+# IDE
+.vscode/
+.idea/
+
+
+
